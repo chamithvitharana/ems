@@ -1,0 +1,68 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/ems}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  sql:
+    init:
+      mode: always
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+server:
+  port: 8096
+
+springdoc:
+  swagger-ui:
+    path: /notification/swagger-ui.html
+  api-docs:
+    path: /notification/v3/api-docs
+
+openapi:
+  service:
+    title: transaction-service doc
+    version: 1.0.0
+    url: ${API_GATEWAY_URL:http://localhost:8222}
+email:
+  account:
+    enabled: true
+    username: ems.team.lk@gmail.com
+    password: zgla mxio dwlw ccuv
+    from-email: iems.team.lk@gmail.com
+
+sms:
+  account:
+    enabled: true
+  sendlk:
+    api-key: 2563|4xscRC3KqzRSx1eSxSj9xJ6kPVZuIg2tOmi9lYBs
+    sender-id: SendTest
+
+customer:
+  batch:
+    size: 100
