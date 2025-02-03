@@ -1,0 +1,46 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/ems}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8093
+
+springdoc:
+  swagger-ui:
+    path: /access-point/swagger-ui.html
+  api-docs:
+    path: /access-point/v3/api-docs
+
+openapi:
+  service:
+    title: access-point-service doc
+    version: 1.0.0
+    url: ${API_GATEWAY_URL:http://localhost:8222}

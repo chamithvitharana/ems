@@ -1,0 +1,242 @@
+server:
+  port: 8222
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            exposedHeaders:
+              - "*"
+            allowCredentials: true
+      routes:
+        - id: auth-service
+          uri: lb:http://AUTH-SERVICE
+          predicates:
+            - Path=/api/v1/auth/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: auth-service-swagger-ui
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/swagger-ui/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: auth-service-api-docs
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/v3/api-docs
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: customer-service
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/api/v1/customer/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: customer-service-swagger-ui
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/customer/swagger-ui/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: customer-service-api-docs
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/customer/v3/api-docs
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: vehicle-service
+          uri: lb://VEHICLE-SERVICE
+          predicates:
+            - Path=/api/v1/vehicle/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: vehicle-service-swagger-ui
+          uri: lb://VEHICLE-SERVICE
+          predicates:
+            - Path=/vehicle/swagger-ui/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: vehicle-service-api-docs
+          uri: lb://VEHICLE-SERVICE
+          predicates:
+            - Path=/vehicle/v3/api-docs
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: chat-service-swagger-ui
+          uri: lb://CHAT-SERVICE
+          predicates:
+            - Path=/chat/swagger-ui/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: chat-service-api-docs
+          uri: lb://CHAT-SERVICE
+          predicates:
+            - Path=/chat/v3/api-docs
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: chat-service-api
+          uri: lb://CHAT-SERVICE
+          predicates:
+            - Path=/api/v1/chat/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: chat-service-websocket
+          uri: lb:ws://CHAT-SERVICE
+          predicates:
+            - Path=/chat-service
+          filters:
+            - name: DedupeResponseHeader
+              args:
+                name: Access-Control-Allow-Origin
+                strategy: RETAIN_UNIQUE
+            - name: DedupeResponseHeader
+              args:
+                name: Access-Control-Allow-Origin
+                strategy: RETAIN_FIRST
+
+        - id: transaction-service
+          uri: lb://TRANSACTION-SERVICE
+          predicates:
+            - Path=/api/v1/transaction/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/v1/notification/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: agent-service
+          uri: lb://AGENT-SERVICE
+          predicates:
+            - Path=/api/v1/agent/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: access-point-service
+          uri: lb://ACCESS-POINT-SERVICE
+          predicates:
+            - Path=/api/v1/access-point/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: access-point-service-swagger-ui
+          uri: lb://ACCESS-POINT-SERVICE
+          predicates:
+            - Path=/access-point/swagger-ui/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        - id: access-point-service-api-docs
+          uri: lb://ACCESS-POINT-SERVICE
+          predicates:
+            - Path=/access-point/v3/api-docs
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        # Public endpoints for Vehicle Service
+        - id: public-vehicle-service
+          uri: lb://VEHICLE-SERVICE
+          predicates:
+            - Path=/api/v1/public/vehicle/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        # Public endpoints for Transaction Service
+        - id: public-transaction-service
+          uri: lb://TRANSACTION-SERVICE
+          predicates:
+            - Path=/api/v1/public/transaction/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+
+        # Public endpoints for Access Point Service
+        - id: public-access-point-service
+          uri: lb://ACCESS-POINT-SERVICE
+          predicates:
+            - Path=/api/v1/public/access-point/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin RETAIN_FIRST
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+        primaryName: API Gateway Service
+      - url: /auth/v3/api-docs
+        name: Auth Service
+        primaryName: Auth Service
+      - url: /customer/v3/api-docs
+        name: Customer Service
+        primaryName: Customer Service
+      - url: /vehicle/v3/api-docs
+        name: Vehicle Service
+        primaryName: Vehicle Service
+      - url: /chat/v3/api-docs
+        name: Chat Service
+        primaryName: Chat Service
+      - url: /access-point/v3/api-docs
+        name: Access Point Service
+        primaryName: Access Point Service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway, health, routes
+  endpoint:
+    gateway:
+      enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+    reactor:
+      netty: DEBUG

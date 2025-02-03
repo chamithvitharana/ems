@@ -1,0 +1,51 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: ${DISCOVERY_SERVICE_URL:http://localhost:8761}/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+spring:
+  datasource:
+    url: ${DB_HOST:jdbc:postgresql://localhost:5432/ems}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 2000000
+      connection-timeout: 30000
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  sql:
+    init:
+      mode: always
+server:
+  port: 8062
+
+springdoc:
+  swagger-ui:
+    path: /transaction/swagger-ui.html
+  api-docs:
+    path: /transaction/v3/api-docs
+
+openapi:
+  service:
+    title: transaction-service doc
+    version: 1.0.0
+    url: ${API_GATEWAY_URL:http://localhost:8222}
+
+stripe:
+  api:
+    key: sk_test_51QWGP7Jqz2qlkGLgmu8v3dproYX3IdrwuAV7B1EGGpfUldw8THYP0an7qQT10HyCnlQZDtUVGfT9K30hkk9oOxK600XCZVJg2H
+    secretKey: sk_test_51QWGP7Jqz2qlkGLgmu8v3dproYX3IdrwuAV7B1EGGpfUldw8THYP0an7qQT10HyCnlQZDtUVGfT9K30hkk9oOxK600XCZVJg2H
