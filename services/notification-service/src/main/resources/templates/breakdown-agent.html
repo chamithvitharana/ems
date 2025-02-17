@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #d9534f;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content h2 {
+            color: #d9534f;
+        }
+
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #f1f1f1;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Breakdown Report - Emergency Services</h1>
+    </div>
+    <div class="content">
+        <h2>Hi Emergency Services Team,</h2>
+        <p>A breakdown has been reported by a customer. Below are the details of the incident:</p>
+
+        <table class="table">
+            <tr>
+                <th>Customer Name</th>
+                <th>Contact Number</th>
+                <th>Vehicle Number</th>
+                <th>Vehicle Type</th>
+                <th>Breakdown Location</th>
+                <th>Date & Time</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td th:text="${customerName}">John Doe</td>
+                <td th:text="${contactNumber}">+1234567890</td>
+                <td th:text="${vehicleNumber}">ABC-1234</td>
+                <td th:text="${vehicleType}">Car</td>
+                <td th:text="${location}">Highway Exit 5</td>
+                <td th:text="${dateTime}">--/--/---- --:--</td>
+                <td th:text="${description}">Flat tire, vehicle unable to move.</td>
+            </tr>
+        </table>
+
+        <div class="map-container">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=${latitude},${longitude}&zoom=15&size=600x300&maptype=roadmap&markers=color:red|${latitude},${longitude}&key=YOUR_GOOGLE_MAPS_API_KEY" alt="Location Map">
+        </div>
+
+        <p><a class="button" href="https://www.google.com/maps?q=${latitude},${longitude}" target="_blank" th:href="'https://www.google.com/maps?q=' + ${latitude} + ',' + ${longitude}">Open Location in Google Maps</a></p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Emergency Services. All rights reserved.</p>
+        <p><a href="#" style="color: #999999;" th:href="${unsubscribeLink}">Unsubscribe</a> | <a href="#" style="color: #999999;" th:href="${contactUsLink}">Contact Support</a></p>
+    </div>
+</div>
+</body>
+</html>
