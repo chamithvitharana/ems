@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #0073e6;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .qr-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Your Vehicle Has Been Successfully Added</h1>
+    </div>
+    <div class="content">
+        <p>Dear <span th:text="${name}">User</span>,</p>
+        <p>Your vehicle has been successfully registered in the Expressway Management System. Here are your vehicle
+            details:</p>
+        <ul>
+            <li><strong>Vehicle Model:</strong> <span th:text="${vehicleModel}">Toyota Corolla</span></li>
+            <li><strong>License Plate:</strong> <span th:text="${licensePlate}">ABC-1234</span></li>
+        </ul>
+
+        <!-- QR Code Image -->
+        <div class="qr-image">
+            <p>Scan this QR code for your vehicle rrrrrrrrrrrcccccccccccccrrrrrrrrr:</p>
+            <img alt="QR Code" style="width: 150px; height: 150px;" th:src="${qrCodeImage}">
+            <!-- <img  alt="QR Code" style="width: 150px; height: 150px;" th:src="data:image/png;base64,${qrCodeImage}" > -->
+            <img th:src="@{'data:image/jpeg;base64,'+${qrCodeImage}}" />
+            <!-- data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADIAQAAAACFI5MzAAAA5klEQVR4Xu2VQRKDMAhFcZVjcFMlN80xspLysXZqq+v8Rf44Dslz8YVAxJ8kvxsfTTIJNAkN6RJaunpXQ6hMBGHtshav55KHmGiFd7xhn44cDyXx9uR6LHFUO12fSxqC1liSGEImcisS0mWLIiPQvbTr/wwnOImxd/CKLR4SM68t6X1z3y//M5q4W2lr5jK9UxHsmeDGsByBTCQVeU3X618HjyTHdAnvcJ3tQkTUMZXjGMZ5VCtcJIscgxmW7TujJAQBLcHk27BO0RDPar+75OYcDCTZJbjKIp0hfMhCbjXJJNAk3OQFXepO3HMEU1wAAAAASUVORK5CYII= -->
+            
+        </div>
+
+        <p>Please keep this email for your records. We’re here to help if you have any questions.</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Expressway Management System. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #0073e6;
+            padding: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content h2 {
+            color: #0073e6;
+        }
+
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            color: #999999;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Welcome to the Expressway Management System (EMS)</h1>
+    </div>
+    <div class="content">
+        <h2>Hi, <span th:text="${name}">User</span>!</h2>
+        <p>Thank you for joining the Expressway Management System (EMS). We are excited to have you on board! EMS is
+            designed to make your journey safer and more efficient, allowing you to manage tolls, receive real-time
+            updates, and keep track of your vehicle registrations seamlessly.</p>
+        <p>Here are a few things you can do with your EMS account:</p>
+        <ul>
+            <li>Register your vehicles and generate unique QR codes for quick toll processing.</li>
+            <li>View your transaction history and track toll payments effortlessly.</li>
+            <li>Receive timely notifications about road conditions, toll updates, and important news.</li>
+            <li>Report any breakdowns or incidents directly through the system for fast assistance.</li>
+        </ul>
+        <p>Get started by visiting your account and exploring all the features we have to offer:</p>
+        <p><a class="button" href="#" th:href="${welcomeLink}">Access Your EMS Account</a></p>
+        <p>If you have any questions, feel free to reach out to us. Our support team is here to ensure you have the best
+            experience possible on our expressways.</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Expressway Management System. All rights reserved.</p>
+        <p><a href="#" style="color: #999999;" th:href="${unsubscribeLink}">Unsubscribe</a> | <a href="#"
+                                                                                                 style="color: #999999;"
+                                                                                                 th:href="${contactUsLink}">Contact
+            Support</a></p>
+    </div>
+</div>
+</body>
+</html>

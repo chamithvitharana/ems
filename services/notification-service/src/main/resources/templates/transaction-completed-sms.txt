@@ -1,0 +1,1 @@
+Hi [[${name}]], your EMS transaction is successful. Amount Charged: LKR [[${charges}]]. Thank you for using the Expressway Management System.

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Transaction Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            height: 50px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: left;
+        }
+        .date-range {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div>
+        <img th:src="${logo}" alt="Company Logo" />
+        <h1>Transaction Report</h1>
+    </div>
+</header>
+
+<div class="date-range">
+    <p>Generated Date: <span th:text="${generatedDate}"></span></p>
+    <p>Date Range: <span th:text="${startDate}"></span> to <span th:text="${endDate}"></span></p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Vehicle Number</th>
+        <th>Entrance</th>
+        <th>Exit</th>
+        <th>Amount</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.entranceTime}"></td>
+        <td th:text="${transaction.vehicleRegistrationNumber}"></td>
+        <td th:text="${transaction.entranceName}"></td>
+        <td th:text="${transaction.exitName}"></td>
+        <td th:text="${transaction.amount}"></td>
+        <td th:text="${transaction.status}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

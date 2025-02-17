@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="'Customer Report - ' + ${generatedDate}">Customer Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img th:src="${logo}" alt="Company Logo"/>
+    <h1 th:text="'Vehicle Report - ' + ${generatedDate}">Customer Report</h1>
+</header>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>R Number</th>
+        <th>R Year</th>
+        <th>M Year</th>
+        <th>Fuel</th>
+        <th>NIC</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="r : ${vehicles}">
+        <td th:text="${r.id}"></td>
+        <td th:text="${r.registrationNumber}"></td>
+        <td th:text="${r.registeredYear}"></td>
+        <td th:text="${r.manufacturedYear}"></td>
+        <td th:text="${r.fuelType.name}"></td>
+        <td th:text="${r.customerNIC}"></td>
+        <td th:text="${r.status}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

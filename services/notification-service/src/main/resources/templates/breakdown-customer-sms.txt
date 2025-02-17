@@ -1,0 +1,7 @@
+Emergency Alert!
+Customer: [[${customerName}]]
+Contact: [[${contactNumber}]]
+Vehicle: [[${vehicleNumber}]] ([[${vehicleType}]])
+Location: [[${location}]]
+Issue: [[${description}]]
+Map: https://www.google.com/maps?q=[[${latitude}]],[[${longitude}]]

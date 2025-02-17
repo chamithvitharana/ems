@@ -1,0 +1,12 @@
+Breakdown Report:
+
+Customer: [[${customerName}]]
+Contact: [[${contactNumber}]]
+Vehicle: [[${vehicleType}]] - [[${vehicleNumber}]]
+Location: [[${location}]]
+Date/Time: [[${dateTime}]]
+Issue: [[${description}]]
+
+Map: https://www.google.com/maps?q=[[${latitude}]],[${longitude]]
+
+- Emergency Services Team
